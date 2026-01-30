@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client"
+  provider = "prisma-client-js"
   output   = "../src/generated/prisma"
 }
 
@@ -38,7 +38,7 @@ model Card {
   imgUrl        String?
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  deckCards Deckcard[]
+  deckCards     Deckcard[]
 }
 
 model User {
@@ -52,19 +52,20 @@ model User {
 }
 
 model Deck {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  userID    Int      
-  user   User   @relation(fields: [userID], references: [id])
+  id        Int        @id @default(autoincrement())
+  name      String
+  userID    Int
+  user      User       @relation(fields: [userID], references: [id])
   deckCards Deckcard[]
- 
+
+  @@unique([userID, name])
 }
 
 model Deckcard {
   id       Int @id @default(autoincrement())
   deckID   Int
   cardID   Int
-  position Int  
+  position Int
 
   deck Deck @relation(fields: [deckID], references: [id])
   card Card @relation(fields: [cardID], references: [id])
