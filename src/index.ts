@@ -4,6 +4,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes";
 import cardsRoutes from "./routes/cards.routes";
+import decksRoutes from "./routes/decks.routes"; 
 
 
 
@@ -21,6 +22,7 @@ app.use(
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/cards", cardsRoutes);
+app.use("/api/decks", decksRoutes);
 
 
 
